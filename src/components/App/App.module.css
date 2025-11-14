@@ -1,0 +1,4 @@
+@import 'modern-normalize/modern-normalize.css';
+.app {
+    padding: 0 16px;
+}
