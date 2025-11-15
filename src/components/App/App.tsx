@@ -32,18 +32,20 @@ export default function App() {
   const movies = data?.results ?? [];
   const totalPages = data?.total_pages ?? 1;
 
-  useEffect(() => {
-  if (isFetching) {
+ useEffect(() => {
+  if (isFetching && movies.length > 0) {
     toast.loading("Updating...", { id: "fetch" });
   } else {
     toast.dismiss("fetch");
-  }  
+  }
 
-   if (isSuccess && movies.length === 0) {
-      toast("No movies found for your request.");
-    }
+  if (isSuccess && movies.length === 0) {
+    toast("No movies found for your request.", { id: "no-movies" });
+  } else {
+    toast.dismiss("no-movies");
+  }
+}, [isFetching, isSuccess, movies.length]);
 
-  }, [isFetching, isSuccess, movies.length]);
 
   function handleSearch(newQuery: string) {
     setQuery(newQuery);
